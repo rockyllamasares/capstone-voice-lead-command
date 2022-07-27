@@ -1,298 +1,1136 @@
-<?php require "template/header.php"; ?>
-<?php include "serverside/dbconn.php"; ?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="">
 
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="" />
-	<meta name="author" content="" />
-	<title>kiosk voice lead command</title>
-	<!-- Favicon-->
-	<link rel="icon" type="image/x-icon" href="asset/assets/favicon.ico" />
-	<!-- Bootstrap icons-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-	<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="asset/css/styles.css" rel="stylesheet" />
-	<!-- Favicon-->
-	<link rel="icon" type="image/x-icon" href="asset/sidebar/assets/favicon.ico" />
-	<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="asset/sidebar/css/styles.css" rel="stylesheet" />
-	<style>
-		.bg-dark {
-			background-image: url("asset/image/bg.jpg");
-		}
-	</style>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Shopppie</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- favicon
+		============================================ -->
+	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+
+	<!-- Google Fonts
+		============================================ -->
+	<!-- <link href='https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'> -->
+
+	<!-- Bootstrap CSS
+		============================================ -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Nivo slider CSS
+		============================================ -->
+	<link rel="stylesheet" type="text/css" href="lib/custom-slider/css/nivo-slider.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="lib/custom-slider/css/preview.css" media="screen" />
+
+	<!-- Fontawsome CSS
+		============================================ -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+
+	<!-- owl.carousel CSS
+		============================================ -->
+	<link rel="stylesheet" href="css/owl.carousel.css">
+
+	<!-- jquery-ui CSS
+		============================================ -->
+	<link rel="stylesheet" href="css/jquery-ui.css">
+
+	<!-- meanmenu CSS
+		============================================ -->
+	<link rel="stylesheet" href="css/meanmenu.min.css">
+
+	<!-- animate CSS
+		============================================ -->
+	<link rel="stylesheet" href="css/animate.css">
+
+	<!-- style CSS
+		============================================ -->
+	<link rel="stylesheet" href="style.css">
+
+	<!-- responsive CSS
+		============================================ -->
+	<link rel="stylesheet" href="css/responsive.css">
+
+	<!-- modernizr JS
+		============================================ -->
+	<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
+	<!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-
-
-	<div class="d-flex" id="wrapper">
-		<!-- Sidebar-->
-		<div class="border-end bg-white" id="sidebar-wrapper">
-			<div class="sidebar-heading border-bottom bg-light">Kiosk Voice Lead Command</div>
-			<div class="list-group list-group-flush">
-				<?php
-				$sql = "select * from category order by categoryid asc limit 1";
-				$fquery = $conn->query($sql);
-				$frow = $fquery->fetch_array();
-				?>
-				<li class="active" ><a data-toggle="tab" href="#<?php echo $frow['catname'] ?>"><?php echo $frow['catname'] ?></a></li>
-				<?php
-
-				$sql = "select * from category order by categoryid asc";
-				$nquery = $conn->query($sql);
-				$num = $nquery->num_rows - 1;
-
-				$sql = "select * from category order by categoryid asc limit 1, $num";
-				$query = $conn->query($sql);
-				while ($row = $query->fetch_array()) {
-				?>
-					<li><a data-toggle="tab" href="#<?php echo $row['catname'] ?>"><?php echo $row['catname'] ?></a></li>
-				<?php
-				}
-				?>
-
-				<!-- ==================== sql category prepared to delete======================= -->
-				<?php
-						$sql = "SELECT * FROM category";
-						$result = $conn->query($sql);
-						while ($row = $result->fetch_array()) {
-						?>
-					<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"><?php echo $row['catname'] ?></a>
-				<?php } ?>
-				<!-- =====================sql category prepared to delete=================== -->
-			</div>
-		</div>
-		<!-- Page content wrapper-->
-		<div id="page-content-wrapper">
-			<!-- Top navigation-->
-			<nav class="navbar navbar-expand-lg navbar-light">
-				<div class="container-fluid">
-					<button class="btn btn-primary" id="sidebarToggle">CATEGORY</button>
-				</div>
-			</nav>
-			<!-- Page content-->
-			<div class="container-fluid">
-				<header class="bg-dark py-5">
-					<div class="container-fluid">
-						<div class="container px-4 px-lg-5 my-5">
-							<div class="text-center text-white">
-								<h1 class="display-4 fw-bolder">Shop in style</h1>
-								<p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+	<!-- header start -->
+	<header class="header-area">
+		<div class="header-top-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 hidden-xs">
+						<div class="header-top-left">
+							<div class="language-usd">
+								<!-- <ul>
+                                        <li><a href="#">eng</a>
+                                            <ul class="submenu-mainmenu">
+                                                <li><a href="#">Bengali</a></li>
+                                                <li><a href="#">English</a></li>
+                                                <li><a href="#">French</a></li>
+                                                <li><a href="#">German</a></li>
+                                                <li><a href="#">Spanish</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">usd</a>
+                                            <ul class="submenu-mainmenu">
+                                                <li><a href="#">usd</a></li>
+                                                <li><a href="#">uero</a></li>
+                                                <li><a href="#">taka</a></li>
+                                                <li><a href="#">pound</a></li>
+                                                <li><a href="#">rupi</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul> -->
 							</div>
 						</div>
-				</header>
-
-				<section class="py-5">
-					<div class="container px-4 px-lg-5 mt-5">
-						<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-							<!-- ========================================================================================= -->
-							<?php
-							$sql = "select * from category order by categoryid asc limit 1";
-							$fquery = $conn->query($sql);
-							$ftrow = $fquery->fetch_array();
-							?>
-							<div id="<?php echo $ftrow['catname']; ?>" class="tab-pane fade in active" style="margin-top:20px;">
-								<?php
-
-								$sql = "select * from product where categoryid='" . $ftrow['categoryid'] . "'";
-								$pfquery = $conn->query($sql);
-								$inc = 4;
-								while ($pfrow = $pfquery->fetch_array()) {
-									$inc = ($inc == 4) ? 1 : $inc + 1;
-									if ($inc == 1) echo "<div class='row'>";
-								?>
-									<div class="col-md-3">
-										<div class="panel panel-default">
-											<div class="panel-heading text-center">
-												<b><?php echo $pfrow['productname']; ?></b>
-											</div>
-											<div class="panel-body">
-												<img src="<?php if (empty($pfrow['photo'])) {
-																echo "upload/noimage.jpg";
-															} else {
-																echo $pfrow['photo'];
-															} ?>" height="225px;" width="100%">
-											</div>
-											<div class="panel-footer text-center">
-												&#x20A8; <?php echo number_format($pfrow['price'], 2); ?>
-											</div>
-										</div>
-									</div>
-								<?php
-									if ($inc == 4) echo "</div>";
-								}
-								if ($inc == 1) echo "<div class='col-md-3'></div><div class='col-md-3'></div><div class='col-md-3'></div></div>";
-								if ($inc == 2) echo "<div class='col-md-3'></div><div class='col-md-3'></div></div>";
-								if ($inc == 3) echo "<div class='col-md-3'></div></div>";
-								?>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="header-top-right">
+							<div class="account-cart">
+								<ul>
+									<!-- <li class="account"><a href="#">my account</a>
+                                            <ul class="submenu-mainmenu">
+                                                <li><a href="cart.html">my bag</a></li>
+                                                <li><a href="checkout.html">checkout</a></li>
+                                                <li><a href="wishlist.html">wishlist</a></li>
+                                            </ul>
+                                        </li> -->
+									<!-- <li class="login"><a href="#">login</a>
+                                            <ul class="submenu-mainmenu">
+                                                <li><a href="#">login or register</a></li>
+                                                <li class="login-button"><a href="#">login</a></li>
+                                                <li><a href="#">or</a></li>
+                                                <li class="creat-button"><a href="#">creat account</a></li>
+                                            </ul>
+                                        </li> -->
+									<li class="cart"><a href="cart.html"><img src="img/icon/cart.png" alt="cart">
+											<p>2</p>
+										</a>
+										<ul class="submenu-mainmenu">
+											<li class="single-cart-item clearfix">
+												<span class="cart-img">
+													<a href="#"><img src="img/menu/3.jpg" alt=""></a>
+												</span>
+												<span class="cart-info">
+													<a href="#">Lorem Ipsam...</a>
+													<span>1 x $104.99</span>
+													<a class="trash" href="#"><i class="fa fa-trash"></i></a>
+												</span>
+											</li>
+											<li class="single-cart-item clearfix">
+												<span class="cart-img">
+													<a href="#"><img src="img/menu/4.jpg" alt=""></a>
+												</span>
+												<span class="cart-info">
+													<a href="#">Lorem Ipsam...</a>
+													<span>2 x $104.99</span>
+													<a class="trash" href="#"><i class="fa fa-trash"></i></a>
+												</span>
+											</li>
+											<li>
+												<span class="sub-total-cart text-center">
+													SubTotal <span>$620</span>
+													<a href="checkout.html" class="view-cart">Checkout</a>
+												</span>
+											</li>
+										</ul>
+									</li>
+								</ul>
 							</div>
-							<?php
-
-							$sql = "select * from category order by categoryid asc";
-							$tquery = $conn->query($sql);
-							$tnum = $tquery->num_rows - 1;
-
-							$sql = "select * from category order by categoryid asc limit 1, $tnum";
-							$cquery = $conn->query($sql);
-							while ($trow = $cquery->fetch_array()) {
-							?>
-								<div id="<?php echo $trow['catname']; ?>" class="tab-pane fade" style="margin-top:20px;">
-									<?php
-
-									$sql = "select * from product where categoryid='" . $trow['categoryid'] . "'";
-									$pquery = $conn->query($sql);
-									$inc = 4;
-									while ($prow = $pquery->fetch_array()) {
-										$inc = ($inc == 4) ? 1 : $inc + 1;
-										if ($inc == 1) echo "<div class='row'>";
-									?>
-										<div class="col-md-3">
-											<div class="panel panel-default">
-												<div class="panel-heading text-center">
-													<b><?php echo $prow['productname']; ?></b>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main-header-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+						<div class="logo">
+							<a href="index.html"><img src="img/logo/logo.png" alt="SHOPPPIE"></a>
+						</div>
+					</div>
+					<div class="col-lg-7 col-md-8 col-sm-6">
+						<div class="mainmenu">
+							<nav>
+								<ul>
+									<li><a href="index.html">Home</a>
+										<ul class="submenu-mainmenu">
+											<li><a href="index.html">Home Version 1</a></li>
+											<li><a href="index-2.html">Home Version 2</a></li>
+										</ul>
+									</li>
+									<li><a href="shop-full-grid.html">Women</a>
+										<div class="mega-menu">
+											<span>
+												<a href="shop-grid-left-sidebar.html" class="title">men</a>
+												<a href="#">blazers</a>
+												<a href="#">jackets</a>
+												<a href="#">Colletions</a>
+												<a href="#">T-shirts</a>
+												<a href="#">Jeens pant's</a>
+												<a href="#">Sport shoes</a>
+											</span>
+											<span>
+												<a href="shop-grid-left-sidebar.html" class="title">women</a>
+												<a href="#">cocktail</a>
+												<a href="#">sunglass</a>
+												<a href="#">evening</a>
+												<a href="#">footwear</a>
+												<a href="#">bootees bags</a>
+												<a href="#">furniture</a>
+											</span>
+											<span>
+												<a href="shop-grid-left-sidebar.html" class="title">accessories</a>
+												<a href="#">gagets</a>
+												<a href="#">laptop</a>
+												<a href="#">mobile</a>
+												<a href="#">lifestyle</a>
+												<a href="#">Jeens pant's</a>
+												<a href="#">Sport items</a>
+											</span>
+											<span>
+												<img src="img/menu/1.jpg" alt="">
+												<img src="img/menu/2.jpg" alt="">
+											</span>
+										</div>
+									</li>
+									<li><a href="shop-full-grid.html">Accessories</a></li>
+									<li><a href="blog-full-view.html">Blog</a>
+										<ul class="submenu-mainmenu">
+											<li><a href="blog-full-view.html">Blog Full View</a></li>
+											<li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+											<li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+											<li><a href="blog-details.html">Blog Details</a></li>
+										</ul>
+									</li>
+									<li><a href="shop-full-grid.html">Shop</a>
+										<ul class="submenu-mainmenu">
+											<li><a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a></li>
+											<li><a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a></li>
+											<li><a href="shop-grid-left-sidebar.html">Shop Grid Left Sidebar</a></li>
+											<li><a href="shop-grid-right-sidebar.html">Shop Grid Right Sidebar</a></li>
+											<li><a href="shop-full-grid.html">Shop None Sidebar</a></li>
+											<li><a href="product-details-fullwidth.html">Product Details Fullwidth</a></li>
+											<li><a href="product-details-left-sidebar.html">Product Details Left Sidebar</a></li>
+											<li><a href="product-details-right-sidebar.html">Product Details Right Sidebar</a></li>
+										</ul>
+									</li>
+									<li><a href="about-us.html">Pages</a>
+										<ul class="submenu-mainmenu">
+											<li><a href="about-us.html">About Us</a></li>
+											<li><a href="cart.html">Cart</a></li>
+											<li><a href="checkout.html">Checkout</a></li>
+											<li><a href="wishlist.html">Wishlist</a></li>
+											<li><a href="404.html">404 Page</a></li>
+										</ul>
+									</li>
+									<li><a href="contact.html">contact</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Mobile Menu Area start -->
+		<div class="mobile-menu-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="mobile-menu">
+							<nav id="dropdown">
+								<ul>
+									<li><a href="index.html">HOME</a>
+										<ul>
+											<li><a href="index.html">Home Version 1</a></li>
+											<li><a href="index-2.html">Home Version 2</a></li>
+										</ul>
+									</li>
+									<li><a href="shop-full-grid.html">Women</a></li>
+									<li><a href="shop-full-grid.html">Accessories</a></li>
+									<li><a href="blog-full-view.html">Blog</a>
+										<ul>
+											<li><a href="blog-full-view.html">Blog Full View</a></li>
+											<li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+											<li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+											<li><a href="blog-details.html">Blog Details</a></li>
+										</ul>
+									</li>
+									<li><a href="shop-full-grid.html">Shop</a>
+										<ul>
+											<li><a href="shop-grid-left-sidebar.html">Shop Grid Left Sidebar</a></li>
+											<li><a href="shop-grid-right-sidebar.html">Shop Grid Right Sidebar</a></li>
+											<li><a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a></li>
+											<li><a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a></li>
+											<li><a href="shop-full-grid.html">Shop None Sidebar</a></li>
+											<li><a href="product-details-fullwidth.html">Product Details Fullwidth</a></li>
+											<li><a href="product-details-left-sidebar.html">Product Details Left Sidebar</a></li>
+											<li><a href="product-details-right-sidebar.html">Product Details Right Sidebar</a></li>
+										</ul>
+									</li>
+									<li><a href="about-us.html">Pages</a>
+										<ul>
+											<li><a href="about-us.html">About Us</a></li>
+											<li><a href="cart.html">Cart</a></li>
+											<li><a href="checkout.html">Checkout</a></li>
+											<li><a href="wishlist.html">Wishlist</a></li>
+											<li><a href="404.html">404 Page</a></li>
+										</ul>
+									</li>
+									<li><a href="contact.html">contact</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Mobile Menu Area end -->
+	</header>
+	<!-- header end -->
+	<div class="banner-area clearfix">
+	</div>
+	<!-- featured start -->
+	<div class="featured-area clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-title">
+						<h2>featured products</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-tab">
+						<div class="section-tab-menu text-left">
+							<ul role="tablist">
+								<li role="presentation" class="active"><a href="#women" aria-controls="women" role="tab" data-toggle="tab">women</a></li>
+								<li role="presentation"><a href="#men" aria-controls="men" role="tab" data-toggle="tab">Men</a></li>
+								<li role="presentation"><a href="#trendy" aria-controls="trendy" role="tab" data-toggle="tab">trendy</a></li>
+							</ul>
+						</div>
+						<div class="clearfix"></div>
+						<div class="tab-content row">
+							<div id="women" role="tabpanel" class="active section-tab-item">
+								<div class="tab-item-slider">
+									<div class="col-xs-12 col-width">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/1.jpg" alt="">
+													</a>
 												</div>
-												<div class="panel-body">
-													<img src="<?php if ($prow['photo'] == '') {
-																	echo "upload/noimage.jpg";
-																} else {
-																	echo $prow['photo'];
-																} ?>" height="225px;" width="100%">
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
 												</div>
-												<div class="panel-footer text-center">
-													&#x20A8; <?php echo number_format($prow['price'], 2); ?>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
 												</div>
 											</div>
 										</div>
-									<?php
-										if ($inc == 4) echo "</div>";
-									}
-									if ($inc == 1) echo "<div class='col-md-3'></div><div class='col-md-3'></div><div class='col-md-3'></div></div>";
-									if ($inc == 2) echo "<div class='col-md-3'></div><div class='col-md-3'></div></div>";
-									if ($inc == 3) echo "<div class='col-md-3'></div></div>";
-									?>
-								</div>
-							<?php
-							}
-							?>
-
-
-
-							<!-- =========================================================================== -->
-							<div class="col mb-5">
-								<div class="card h-100">
-									<!-- Product image-->
-									<img class="card-img-top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Blag-F1I9HmWBEf6jGLw5gHaFF%26pid%3DApi&f=1" alt="..." />
-									<!-- Product details-->
-									<div class="card-body p-4">
-										<div class="text-center">
-											<!-- Product name-->
-											<h5 class="fw-bolder">name</h5>
-											<!-- Product price-->
-											php 500
-
-										</div>
 									</div>
-									<!-- Product actions-->
-									<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-										<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-									</div>
-								</div>
-							</div>
-							<div class="col mb-5">
-								<div class="card h-100">
-									<!-- Sale badge-->
-									<div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-									<!-- Product image-->
-									<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-									<!-- Product details-->
-									<div class="card-body p-4">
-										<div class="text-center">
-											<!-- Product name-->
-											<h5 class="fw-bolder">Special Item</h5>
-											<!-- Product reviews-->
-											<div class="d-flex justify-content-center small text-warning mb-2">
-												<div class="bi-star-fill"></div>
-												<div class="bi-star-fill"></div>
-												<div class="bi-star-fill"></div>
-												<div class="bi-star-fill"></div>
-												<div class="bi-star-fill"></div>
+									<div class="col-xs-12 col-width">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.mpY_xjQk0ogZlHsGsTJvzQHaE8%26pid%3DApi&f=1" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="old-price">$26</span>
+														<!-- <span class="new-price">$25.99</span> -->
+													</div>
+													<div class="new-sale">
+														<span>new</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
 											</div>
-											<!-- Product price-->
-											<span class="text-muted text-decoration-line-through">$20.00</span>
-											$18.00
 										</div>
 									</div>
-									<!-- Product actions-->
-									<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-										<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-									</div>
-								</div>
-							</div>
-							<div class="col mb-5">
-								<div class="card h-100">
-									<!-- Sale badge-->
-									<div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-									<!-- Product image-->
-									<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-									<!-- Product details-->
-									<div class="card-body p-4">
-										<div class="text-center">
-											<!-- Product name-->
-											<h5 class="fw-bolder">Sale Item</h5>
-											<!-- Product price-->
-											<span class="text-muted text-decoration-line-through">$50.00</span>
-											$25.00
-										</div>
-									</div>
-									<!-- Product actions-->
-									<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-										<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-									</div>
-								</div>
-							</div>
-							<div class="col mb-5">
-								<div class="card h-100">
-									<!-- Product image-->
-									<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-									<!-- Product details-->
-									<div class="card-body p-4">
-										<div class="text-center">
-											<!-- Product name-->
-											<h5 class="fw-bolder">Popular Item</h5>
-											<!-- Product reviews-->
-											<div class="d-flex justify-content-center small text-warning mb-2">
-												<div class="bi-star-fill"></div>
-												<div class="bi-star-fill"></div>
-												<div class="bi-star-fill"></div>
-												<div class="bi-star-fill"></div>
-												<div class="bi-star-fill"></div>
+									<div class="col-xs-12 col-width">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image,img-fluid" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.5rKAodvE-jS6ZDQ235PYdQHaEU%26pid%3DApi&f=1" alt="responsive image">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+														<!--                                                            <span class="old-price">$180</span>-->
+													</div>
+													<div class="new-sale">
+														<span>new</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
 											</div>
-											<!-- Product price-->
-											$40.00
 										</div>
 									</div>
-									<!-- Product actions-->
-									<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-										<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+									<div class="col-xs-12 col-width">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/4.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+														<!--                                                            <span class="old-price">$180</span>-->
+													</div>
+													<div class="new-sale">
+														<span>new</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12 col-width">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/1.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+														<!--                                                            <span class="old-price">$180</span>-->
+													</div>
+													<div class="new-sale">
+														<span>new</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12 col-width">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/2.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+														<!--                                                            <span class="old-price">$180</span>-->
+													</div>
+													<div class="new-sale">
+														<span>new</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12 col-width">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/3.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+														<!--                                                            <span class="old-price">$180</span>-->
+													</div>
+													<div class="new-sale">
+														<span>new</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12 col-width">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/4.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+														<!--                                                            <span class="old-price">$180</span>-->
+													</div>
+													<div class="new-sale">
+														<span>new</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="men" role="tabpanel" class="section-tab-item">
+								<div class="tab-item-slider">
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/2.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/4.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/1.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/3.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/2.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/4.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/1.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/3.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="trendy" role="tabpanel" class="section-tab-item">
+								<div class="tab-item-slider">
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item box-shadow-effect">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/1.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item box-shadow-effect">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/4.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item box-shadow-effect">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/2.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item box-shadow-effect">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/3.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item box-shadow-effect">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/1.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item box-shadow-effect">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/4.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item box-shadow-effect">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/2.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="single-product">
+											<div class="single-product-item box-shadow-effect">
+												<div class="single-product-img clearfix hover-effect">
+													<a href="#">
+														<img class="primary-image" src="img/product/3.jpg" alt="">
+													</a>
+												</div>
+												<div class="single-product-info clearfix">
+													<div class="pro-price">
+														<span class="new-price">$25.99</span>
+													</div>
+												</div>
+												<div class="product-content text-center">
+													<h3>Full sleev women shirt</h3>
+													<h4><a href="#">view details</a></h4>
+												</div>
+												<div class="product-action">
+													<ul>
+														<li><a href="#" data-toggle="tooltip" title="Compage"><i class="fa fa-refresh"></i></a></li>
+														<li class="add-bag"><a href="#" data-toggle="tooltip" title="Shopping Cart">Add to Bag</a></li>
+														<li><a href="#" data-toggle="tooltip" title="Like it!"><i class="fa fa-heart"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</section>
+				</div>
 			</div>
 		</div>
 	</div>
+	<!-- footer start -->
+	<footer class="footer-area">
+		<div class="footer-middle-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+						<div class="footer-widget">
+							<div class="footer-logo">
+								<img src="img/logo/footer-logo.png" alt="">
+							</div>
+							<div class="footer-address">
+								<p>28 Green Tower, Street Name New<br> York City, USA</p>
 
+								<p>TELEPHONE- +88017 222 333<br>
+									Email- admin@bootexperts.com</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-2 col-sm-3 col-xs-12">
+						<div class="footer-widget">
+							<h5>Services</h5>
+							<ul>
+								<li><a href="about.html">About us</a></li>
+								<li><a href="about.html">Return Policy</a></li>
+								<li><a href="blog.html">Our Blog</a></li>
+								<li><a href="contact.html">Contact Us</a></li>
+								<li class="hidden-sm"><a href="#">Terms &amp; Condition</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-2 hidden-sm col-xs-12">
+						<div class="footer-widget">
+							<h5>Account</h5>
+							<ul>
+								<li><a href="#">Your Account</a></li>
+								<li><a href="checkout.html">Checkout</a></li>
+								<li><a href="#">Login</a></li>
+								<li><a href="#">Register</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+						<div class="footer-widget">
+							<h5>Get Social</h5>
+							<p>Connected with our social media and<br>get update protidin</p>
+							<ul class="social-icon">
+								<li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="www.google-plus.com"><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+								<li class="hidden-sm"><a href="www.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6 col-xs-12">
+						<div class="copyright">
+							<p>2016 ® All Rights Reserved <span><a href="http://bootexperts.com/">BootExperts</a></span>.</p>
+						</div>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+						<div class="payment text-right">
+							<img src="img/payment/1.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- footer end -->
 
-
-
-	<?php require "template/footer.php"; ?>
+	<!-- jquery
+		============================================ -->
+	<script src="js/vendor/jquery-1.12.3.min.js"></script>
+	<!-- bootstrap JS
+		============================================ -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- meanmenu JS
+		============================================ -->
+	<script src="js/jquery.meanmenu.js"></script>
+	<!-- wow JS
+		============================================ -->
+	<script src="js/wow.min.js"></script>
+	<!-- owl.carousel JS
+		============================================ -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- countdown JS
+		============================================ -->
+	<script src="js/jquery.countdown.min.js"></script>
+	<!-- price-slider JS
+		============================================ -->
+	<script src="js/jquery-price-slider.js"></script>
+	<!-- Elevate Zoom js
+		============================================ -->
+	<script src="js/jquery.elevatezoom.js"></script>
+	<!-- scrollUp JS
+		============================================ -->
+	<script src="js/jquery.scrollUp.min.js"></script>
+	<!-- plugins JS
+		============================================ -->
+	<script src="js/plugins.js"></script>
+	<!-- Nevo Slider js
+		============================================ -->
+	<script type="text/javascript" src="lib/custom-slider/js/jquery.nivo.slider.js"></script>
+	<script type="text/javascript" src="lib/custom-slider/home.js"></script>
+	<!-- main JS
+		============================================ -->
+	<script src="js/main.js"></script>
 </body>
 
 </html>
