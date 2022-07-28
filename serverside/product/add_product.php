@@ -12,10 +12,13 @@ if (empty($fileinfo['filename'])) {
     $location = "";
 } else {
     $newFilename = $fileinfo['filename'] . "_" . time() . "." . $fileinfo['extension'];
-    move_uploaded_file($_FILES["photo"]["tmp_name"], "../../upload/" . $newFilename);
-    $location = "../../upload/" . $newFilename;
+    move_uploaded_file($_FILES["photo"]["tmp_name"], "upload/" . $newFilename);
+    $location = "upload/" . $newFilename;
 }
 
+// sample upload image and file upload
+
+//end of sample upload
 $sql = "INSERT INTO product (productname, categoryid, price, photo) VALUES ('$pname', '$category', '$price', '$location')";
 $conn->query($sql);
 

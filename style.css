@@ -4096,7 +4096,7 @@ input.input-text, select, textarea {
 }
 .mean-container .mean-bar::before {
     color: #ffffff;
-    content: "MENU";
+    content: "CATEGORY";
     font-size: 18px;
     font-weight: 600;
     left: 10px;

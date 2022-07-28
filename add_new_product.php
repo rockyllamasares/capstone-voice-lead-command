@@ -49,7 +49,7 @@
                         <td>
 
                             <label class="col-form-label" for="catname"><b>Photo</b></label><br>
-                            <input type="file" name="photo" id="photo">
+                            <input type="file" name="uploadfile" id="uploadfile">
 
                         </td>
                     </tr>

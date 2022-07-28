@@ -119,16 +119,23 @@
                                     while ($row = $query->fetch_array()) {
                                     ?>
                                     <tr>
-                                        <td align="center"><a href="<?php if (empty($row['photo'])) {
-                                                                        echo "upload/noimage.jpg";
-                                                                    } else {
-                                                                        echo $row['photo'];
-                                                                    } ?>"><img src="<?php if (empty($row['photo'])) {
-                                                                                        echo "upload/noimage.jpg";
-                                                                                    } else {
-                                                                                        echo $row['photo'];
-                                                                                    } ?>" height="30px" width="40px"></a></td>
-                                        <td align="center"><?php echo $row['productname']; ?></td>
+                                        <!-- <td align="center"><a href="<?php if (empty($row['photo'])) {
+                                                                                echo "upload/noimage.jpg";
+                                                                            } else {
+                                                                                echo $row['photo'];
+                                                                            } ?>"><img src="<?php if (empty($row['photo'])) {
+                                                                                                echo "upload/noimage.jpg";
+                                                                                            } else {
+                                                                                                echo $row['photo'];
+                                                                                            } ?>" height="30px" width="40px"></a></td> -->
+                                        <!-- try another way to upload image  -->
+                                        <td align="center">
+                                                <img src="./serverside/image/<?php echo $data['filename'] ?>" height=" 30px", width="40px" >
+                                            
+                                        </td>
+                                        <!-- try another way to upload image  -->
+                                        <td align=" center"><?php echo $row['productname']; ?>
+                                        </td>
                                         <td align="center">&#8369; <?php echo number_format($row['price'], 2); ?></td>
                                         <td align="center">
                                             <a href="edit_product.php?productid=' . $row['productid'] . '"><button type="button" class="btn btn-outline-warning">EDIT</button></a>
@@ -157,7 +164,7 @@
     <script src="asset/sidebar/js/scripts.js"></script>
 
     <script type="text/javascript">
-         $(document).ready(function() {
+        $(document).ready(function() {
         $("#catList").on('change', function() {
             if ($(this).val() == 0) {
                 window.location = 'view_product.php';
